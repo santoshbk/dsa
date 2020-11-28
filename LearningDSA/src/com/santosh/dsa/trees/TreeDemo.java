@@ -1,4 +1,4 @@
-package learning.dsa.trees;
+package com.santosh.dsa.trees;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
