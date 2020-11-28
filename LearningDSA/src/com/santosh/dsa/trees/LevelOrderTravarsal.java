@@ -1,4 +1,4 @@
-package com.lc.challenges.trees;
+package com.santosh.dsa.trees;
 
 import java.util.ArrayList;
 import java.util.Arrays;
