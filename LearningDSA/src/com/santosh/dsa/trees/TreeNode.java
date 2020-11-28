@@ -1,25 +1,19 @@
-package com.santosh.dsa.trees;
+package learning.dsa.trees;
 
-public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+public class BTreeNode {
 
-    TreeNode() {
-    }
+    public int data;
+    public BTreeNode left, right;
 
-    TreeNode(final int val) {
-        this.val = val;
-    }
-
-    TreeNode(final int val, final TreeNode left, final TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
+    public BTreeNode(final int data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
     }
 
     @Override
     public String toString() {
-        return "TN: " + this.val;
+        return "BTN: " + this.data;
     }
+
 }
