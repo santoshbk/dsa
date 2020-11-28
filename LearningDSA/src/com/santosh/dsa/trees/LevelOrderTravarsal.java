@@ -1,74 +1,134 @@
-package com.santosh.dsa.trees;
+/**
+ *
+ */
+package learning.dsa.trees;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import static org.junit.Assert.*;
 
-public class LevelOrderTravarsal {
-    public static List<List<Integer>> levelOrder(final TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        interativeLevelOrder(root, res);
-//        levelOrder(root, 0, res);
-        return res;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author skumbara
+ *
+ */
+public class BinaryTreeProblemsTest {
+
+    private BTreeNode root;
+    private BinaryTreeProblems t;
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+        this.t = new BinaryTreeProblems();
+        this.root = this.getTempTree();
     }
 
-    private static void levelOrder(final TreeNode n, final int level, final List<List<Integer>> list) {
-        if (n == null) {
-            return;
-        }
-        if (list.size() == level) {
-            list.add(new ArrayList<Integer>());
-        }
-        list.get(level).add(n.val);
-        levelOrder(n.left, level + 1, list);
-        levelOrder(n.right, level + 1, list);
+    private BTreeNode getTempTree() {
+        BTreeNode node = new BTreeNode(1);
+        this.t.insertIntoBT(node, 2);
+        this.t.insertIntoBT(node, 3);
+        this.t.insertIntoBT(node, 4);
+        this.t.insertIntoBT(node, 5);
+        this.t.insertIntoBT(node, 6);
+        this.t.insertIntoBT(node, 7);
+        return node;
     }
 
-    private static void interativeLevelOrder(final TreeNode root, final List<List<Integer>> res) {
-        Queue<TreeNode> q = new LinkedList<>();
-        int count1 = 0;
-        if (root != null) {
-            res.add(Arrays.asList(root.val));
-            if (addToQ(q, root.left)) {
-                count1++;
-            }
-            if (addToQ(q, root.right)) {
-                count1++;
-            }
-        }
-        int count2 = 0;
-        List<Integer> list = new ArrayList<>();
-        while (!q.isEmpty()) {
-            TreeNode n = q.poll();
-            count1--;
-            if (null != n) {
-                list.add(n.val);
-                if (addToQ(q, n.left)) {
-                    count2++;
-                }
-                if (addToQ(q, n.right)) {
-                    count2++;
-                }
-            }
-            if (count1 == 0) {
-                if (!list.isEmpty()) {
-                    res.add(list);
-                }
-                list = new ArrayList<>();
-                count1 = count2;
-                count2 = 0;
-            }
-        }
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#maxElementInBT(learning.dsa.trees.BTreeNode)}.
+     */
+    @Test
+    public void testMaxElementInBT() {
+        assertEquals(7, this.t.maxElementInBT(this.root));
     }
 
-    private static boolean addToQ(final Queue<TreeNode> q, final TreeNode n) {
-        return n != null ? q.offer(n) : false;
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#maxElementInBTIterative(learning.dsa.trees.BTreeNode)}.
+     */
+    @Test
+    public void testMaxElementInBTIterative() {
+        assertEquals(7, this.t.maxElementInBTIterative(this.root));
     }
 
-    public static void main(final String[] args) {
-        TreeNode root = new TreeNode(1, new TreeNode(2, new TreeNode(4), null), new TreeNode(3, null, new TreeNode(5)));
-        System.out.println(levelOrder(root));
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#findElementInBT(learning.dsa.trees.BTreeNode, int)}.
+     */
+    @Test
+    public void testFindElementInBT() {
+        assertTrue(this.t.findElementInBT(this.root, 6));
+        assertTrue(this.t.findElementInBT(this.root, 7));
+        assertFalse(this.t.findElementInBT(this.root, 8));
     }
+
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#findElementInBTIterative(learning.dsa.trees.BTreeNode, int)}.
+     */
+    @Test
+    public void testFindElementInBTIterative() {
+        assertTrue(this.t.findElementInBTIterative(this.root, 2));
+        assertTrue(this.t.findElementInBTIterative(this.root, 4));
+        assertFalse(this.t.findElementInBTIterative(this.root, 8));
+    }
+
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#insertIntoBT(learning.dsa.trees.BTreeNode, int)}.
+     */
+    @Test
+    public void testInsertIntoBT() {
+        this.t.insertIntoBT(this.root, 8);
+        this.t.insertIntoBT(this.root, 9);
+        this.t.insertIntoBT(this.root, 11);
+        assertTrue(this.t.findElementInBT(this.root, 6));
+        assertTrue(this.t.findElementInBT(this.root, 8));
+        assertTrue(this.t.findElementInBT(this.root, 9));
+        assertTrue(this.t.findElementInBT(this.root, 11));
+        assertTrue(this.t.findElementInBT(this.root, 7));
+        assertFalse(this.t.findElementInBT(this.root, 12));
+    }
+
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#getSizeOfBinaryTree(learning.dsa.trees.BTreeNode)}.
+     */
+    @Test
+    public void testGetSizeOfBinaryTree() {
+        assertEquals(7, this.t.getSizeOfBinaryTree(this.root));
+    }
+
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#getSizeOfBinaryTreeIterative(learning.dsa.trees.BTreeNode)}.
+     */
+    @Test
+    public void testGetSizeOfBinaryTreeIterative() {
+        assertEquals(7, this.t.getSizeOfBinaryTreeIterative(this.root));
+    }
+
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#reverseLevelOrder(learning.dsa.trees.BTreeNode)}.
+     */
+    @Test
+    public void testReverseLevelOrder() {
+        Object[] a = { 4, 5, 6, 7, 2, 3, 1 };
+        assertArrayEquals(a, this.t.reverseLevelOrder(this.root).toArray());
+    }
+
+    /**
+     * Test method for
+     * {@link learning.dsa.trees.BinaryTreeProblems#reverseLevelOrder(learning.dsa.trees.BTreeNode)}.
+     */
+    @Test
+    public void testMaxDepthOfTree() {
+        assertEquals(3, this.t.maxDepthOfTree(this.root));
+    }
+
 }
