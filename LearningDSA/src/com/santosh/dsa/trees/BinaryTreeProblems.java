@@ -277,8 +277,101 @@ public class BinaryTreeProblems {
 	 * @return min Depth of binary tree
 	 */
 	public int minDepthTreeIterative(final BTreeNode root) {
-		final int dep = 0;
+		if (root == null) {
+			return 0;
+		}
+		int dep = 1;
+		final Queue<BTreeNode> q = new LinkedList<>();
+		q.offer(root);
+		q.offer(null);
+		while (!q.isEmpty()) {
+			final BTreeNode t = q.poll();
+			if (t != null) {
+				if (t.left == null && t.right == null) {
+					return dep;
+				}
+				if (t.left != null) {
+					q.offer(t.left);
+				}
+				if (t.right != null) {
+					q.offer(t.right);
+				}
+			} else {
+				if (!q.isEmpty()) {
+					dep++;
+					q.offer(null);
+				}
+			}
+		}
 		return dep;
 	}
 
+	/**
+	 * 14 - Give an algorithm for finding the deepest node of the binary tree.
+	 *
+	 * @param root Root Node of binary tree
+	 * @return deepest node
+	 */
+	public BTreeNode deepestNodeInTree(final BTreeNode root) {
+		if (root == null) {
+			return null;
+		}
+		BTreeNode t = null;
+		final Queue<BTreeNode> q = new LinkedList<>();
+		q.offer(root);
+		while (!q.isEmpty()) {
+			t = q.poll();
+			if (t.left != null) {
+				q.offer(t.left);
+			}
+			if (t.right != null) {
+				q.offer(t.right);
+			}
+		}
+		return t;
+	}
+
+	/**
+	 * 15 - Give an algorithm for deleting an element (assuming data is given) from
+	 * binary tree
+	 *
+	 * @param root Root Node of binary tree
+	 * @param data data to be deleted
+	 */
+	public boolean deleteNodeFromTree(final BTreeNode root, final int data) {
+		if (root == null) {
+			return false;
+		}
+		BTreeNode n = null;
+		final Queue<BTreeNode> q = new LinkedList<>();
+		q.offer(root);
+		while (!q.isEmpty()) {
+			final BTreeNode x = q.poll();
+			if (x != null) {
+				if (x.data == data) {
+					n = x;
+				}
+				q.offer(x.left);
+				q.offer(x.right);
+			}
+		}
+		if (n == null) {
+			return false;
+		}
+		BTreeNode t = null;
+		q.clear();
+		q.offer(root);
+		while (!q.isEmpty()) {
+			t = q.poll();
+			if (t.left != null) {
+				q.offer(t.left);
+			}
+			if (t.right != null) {
+				q.offer(t.right);
+			}
+		}
+		n.data = t.data;
+		t = null;
+		return true;
+	}
 }

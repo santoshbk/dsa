@@ -138,6 +138,28 @@ public class BinaryTreeProblemsTest {
 	@Test
 	public void testMinDepthOfTree() {
 		assertEquals(3, this.t.minDepthTree(this.root));
+		assertEquals(this.t.minDepthTree(this.root), this.t.minDepthTreeIterative(this.root));
+		assertEquals(3, this.t.minDepthTreeIterative(this.root));
+	}
+
+	/**
+	 * Test method for
+	 * {@link learning.dsa.trees.BinaryTreeProblems#deepestNodeInTree(learning.dsa.trees.BTreeNode)}.
+	 */
+	@Test
+	public void testDeepestNodeInTree() {
+		assertEquals(7, this.t.deepestNodeInTree(this.root).data);
+	}
+
+	/**
+	 * Test method for
+	 * {@link learning.dsa.trees.BinaryTreeProblems#deleteNodeFromTree(learning.dsa.trees.BTreeNode, int)}.
+	 */
+	@Test
+	public void testDeleteNodeFromTree() {
+		assertTrue(this.t.deleteNodeFromTree(this.root, 6));
+		assertFalse(this.t.findElementInBT(this.root, 6));
+		assertFalse(this.t.deleteNodeFromTree(this.root, 6));
 	}
 
 }
