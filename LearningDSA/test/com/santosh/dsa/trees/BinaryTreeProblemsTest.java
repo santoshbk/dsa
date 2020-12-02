@@ -1,12 +1,12 @@
 package com.santosh.dsa.trees;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.santosh.dsa.trees.BTreeNode;
-import com.santosh.dsa.trees.BinaryTreeProblems;
 
 /**
  * @author skumbara
@@ -61,7 +61,7 @@ public class BinaryTreeProblemsTest {
 	 */
 	@Test
 	public void testFindElementInBT() {
-		assertTrue(this.t.findElementInBT(this.root, 6));
+		assertTrue(this.t.findElementInBT(this.root, 3));
 		assertTrue(this.t.findElementInBT(this.root, 7));
 		assertFalse(this.t.findElementInBT(this.root, 8));
 	}
@@ -124,11 +124,20 @@ public class BinaryTreeProblemsTest {
 
 	/**
 	 * Test method for
-	 * {@link learning.dsa.trees.BinaryTreeProblems#reverseLevelOrder(learning.dsa.trees.BTreeNode)}.
+	 * {@link learning.dsa.trees.BinaryTreeProblems#maxDepthOfTree(learning.dsa.trees.BTreeNode)}.
 	 */
 	@Test
 	public void testMaxDepthOfTree() {
 		assertEquals(3, this.t.maxDepthOfTree(this.root));
+	}
+
+	/**
+	 * Test method for
+	 * {@link learning.dsa.trees.BinaryTreeProblems#minDepthTree(learning.dsa.trees.BTreeNode)}.
+	 */
+	@Test
+	public void testMinDepthOfTree() {
+		assertEquals(3, this.t.minDepthTree(this.root));
 	}
 
 }
